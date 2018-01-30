@@ -1,0 +1,11 @@
+
+csquid:UselessImportCheck"5Remove this unused import 'android.widget.ImageView'.(ú¯ëàüÿÿÿÿ8ÏÆ°¾”,
+lsquid:CommentedOutCodeLine"<This block of commented-out lines of code should be removed.(°œõœýÿÿÿÿ8ÏÆ°¾”,
+Msquid:S1481",Remove this unused "options" local variable.(™¦ûÉþÿÿÿÿ8°ŽÄ¾”,
+lsquid:CommentedOutCodeLine"<This block of commented-out lines of code should be removed.(˜½ŽŒþÿÿÿÿ8ÏÆ°¾”,
+jsquid:UselessImportCheck"<Remove this unused import 'android.transition.ChangeBounds'.(¼×…Áýÿÿÿÿ8ÏÆ°¾”,
+gsquid:CommentedOutCodeLine"<This block of commented-out lines of code should be removed.(Ãø¨8ÁËÀ¾”,
+\squid:S1854";Remove this useless assignment to local variable "options".(™¦ûÉþÿÿÿÿ8ÏÆ°¾”,
+isquid:UselessImportCheck"@Remove this unused import 'android.transition.TransitionValues'.(Ñ¿ª8ù¬¿¾”,
+psquid:MaximumInheritanceDepth"=This class has 10 parents which is greater than 5 authorized.(…ÿÙ®úÿÿÿÿ8ÏÆ°¾”,
+jsquid:UselessImportCheck"BRemove this unused import 'android.transition.TransitionInflater'.(µ³õ8ÏÆ°¾”,

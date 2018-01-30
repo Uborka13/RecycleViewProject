@@ -5,7 +5,7 @@
     android:id="@+id/details_activity"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#2E4A62"
+    android:background="@color/colorBase"
     tools:context="test.soft.ubi.recycleviewproject.DetailsActivity"
     android:orientation="vertical">
 

@@ -2,13 +2,14 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/colorBase"
     tools:context="test.soft.ubi.recycleviewproject.DetailsFragment">
 
     <ImageView
         android:id="@+id/simple_image"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:transitionName="simple_activity_transition"
+        android:transitionName="simple_fragment_transition"
         tools:ignore="UnusedAttribute" />
 
 </FrameLayout>
