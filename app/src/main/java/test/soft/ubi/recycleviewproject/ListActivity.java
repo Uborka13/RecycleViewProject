@@ -3,62 +3,82 @@ package test.soft.ubi.recycleviewproject;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.annotation.Nullable;
 import android.support.v4.app.ActivityOptionsCompat;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.ViewCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.view.animation.AnimationUtils;
-import android.widget.ImageView;
+
+import com.mikepenz.fastadapter.FastAdapter;
+import com.mikepenz.fastadapter.IAdapter;
+import com.mikepenz.fastadapter.adapters.ItemAdapter;
+import com.mikepenz.fastadapter.listeners.OnClickListener;
+import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import test.soft.ubi.recycleviewproject.adapters.SimpleAdapter;
+import butterknife.ButterKnife;
 import test.soft.ubi.recycleviewproject.enums.Icons;
-import test.soft.ubi.recycleviewproject.listeners.RecyclerViewClickListener;
-import test.soft.ubi.recycleviewproject.listeners.RecyclerViewTouchListener;
-import test.soft.ubi.recycleviewproject.viewmodels.SimpleViewModel;
+import test.soft.ubi.recycleviewproject.items.SimpleItem;
 
 public class ListActivity extends AppCompatActivity {
 
+    public static final String TAG = "TAG";
     private static final String ANIMATION = "ANIMATION";
-    private List<SimpleViewModel> simpleViewModelList;
+    private RecyclerView recyclerView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_list);
-        SimpleAdapter adapter = new SimpleAdapter(generateSimpleList());
-        RecyclerView recyclerView = findViewById(R.id.simple_recyclerview);
+        ButterKnife.bind(this);
+        recyclerView = findViewById(R.id.simple_recyclerview);
         if (getIntent().getExtras() != null) {
             setAnimation(recyclerView, getIntent().getExtras().getInt(ANIMATION));
         }
-        recyclerView.addOnItemTouchListener(new RecyclerViewTouchListener(getApplicationContext(), recyclerView, new RecyclerViewClickListener() {
-            @Override
-            public void onClick(View view, int position) {
-
-            }
-
-            @Override
-            public void onLongClick(View view, int position) {
-
-            }
-        }));
+        ItemAdapter itemAdapter = new ItemAdapter();
+        FastAdapter<SimpleItem> fastAdapter = FastAdapter.with(itemAdapter);
+        recyclerView.setAdapter(fastAdapter);
+        recyclerView.getItemAnimator().setChangeDuration(0);
+        itemAdapter.add(generateSimpleList());
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
-        recyclerView.setHasFixedSize(true);
-        recyclerView.setAdapter(adapter);
+
+
+        fastAdapter.withSelectable(true);
+        fastAdapter.withOnClickListener(new OnClickListener<SimpleItem>() {
+            @Override
+            public boolean onClick(@Nullable View v, IAdapter<SimpleItem> adapter, SimpleItem item, int position) {
+                startNewActivity(item);
+                return true;
+            }
+        });
     }
 
-    private List<SimpleViewModel> generateSimpleList() {
-        simpleViewModelList = new ArrayList<>();
-        simpleViewModelList.add(new SimpleViewModel(Icons.OFFSITE));
-        simpleViewModelList.add(new SimpleViewModel(Icons.ONSITE));
-        simpleViewModelList.add(new SimpleViewModel(Icons.TICKET));
-        simpleViewModelList.add(new SimpleViewModel(Icons.TRAIN_GRAY));
-        simpleViewModelList.add(new SimpleViewModel(Icons.TRAIN_WHITE));
-        simpleViewModelList.add(new SimpleViewModel(Icons.VIGNETTE));
+    private List<SimpleItem> generateSimpleList() {
+        List<SimpleItem> simpleViewModelList = new ArrayList<>();
+        simpleViewModelList.add(new SimpleItem().setIcon(Icons.OFFSITE));
+        simpleViewModelList.add(new SimpleItem().setIcon(Icons.ONSITE));
+        simpleViewModelList.add(new SimpleItem().setIcon(Icons.TICKET));
+        simpleViewModelList.add(new SimpleItem().setIcon(Icons.TRAIN_GRAY));
+        simpleViewModelList.add(new SimpleItem().setIcon(Icons.TRAIN_WHITE));
+        simpleViewModelList.add(new SimpleItem().setIcon(Icons.VIGNETTE));
+        simpleViewModelList.add(new SimpleItem().setIcon(Icons.OFFSITE));
+        simpleViewModelList.add(new SimpleItem().setIcon(Icons.ONSITE));
+        simpleViewModelList.add(new SimpleItem().setIcon(Icons.TICKET));
+        simpleViewModelList.add(new SimpleItem().setIcon(Icons.TRAIN_GRAY));
+        simpleViewModelList.add(new SimpleItem().setIcon(Icons.TRAIN_WHITE));
+        simpleViewModelList.add(new SimpleItem().setIcon(Icons.VIGNETTE));
+        simpleViewModelList.add(new SimpleItem().setIcon(Icons.OFFSITE));
+        simpleViewModelList.add(new SimpleItem().setIcon(Icons.ONSITE));
+        simpleViewModelList.add(new SimpleItem().setIcon(Icons.TICKET));
+        simpleViewModelList.add(new SimpleItem().setIcon(Icons.TRAIN_GRAY));
+        simpleViewModelList.add(new SimpleItem().setIcon(Icons.TRAIN_WHITE));
+        simpleViewModelList.add(new SimpleItem().setIcon(Icons.VIGNETTE));
         return simpleViewModelList;
     }
 
@@ -81,13 +101,34 @@ public class ListActivity extends AppCompatActivity {
         }
     }
 
-    public void onItemClicked(int position) {
-        
-        Intent intent = new Intent(this, DetailsActivity.class);
+    public void startNewActivity(SimpleItem item) {
+        Picasso.with(this)
+                .load(item.getIcon().getIcon())
+                .into(item.getImageView());
+        Intent intent = new Intent(ListActivity.this, DetailsActivity.class);
+        intent.putExtra(TAG, item.getIcon().getIcon());
         ActivityOptionsCompat options = ActivityOptionsCompat.
-                makeSceneTransitionAnimation(this,
-                        imageView,
-                        ViewCompat.getTransitionName(imageView));
+                makeSceneTransitionAnimation(ListActivity.this,
+                        item.getImageView(),
+                        ViewCompat.getTransitionName(item.getImageView()));
         startActivity(intent, options.toBundle());
     }
+
+    public void fragmentOldColde(SimpleItem item) {
+        Bundle args = new Bundle();
+        args.putInt(TAG, item.getIcon().getIcon());
+        ActivityOptionsCompat options = ActivityOptionsCompat.
+                makeSceneTransitionAnimation(ListActivity.this,
+                        item.getImageView(),
+                        ViewCompat.getTransitionName(item.getImageView()));
+        DetailsFragment detailsFragment = new DetailsFragment();
+        detailsFragment.setArguments(args);
+        FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+        transaction.addSharedElement(item.getImageView(), ViewCompat.getTransitionName(item.getImageView()));
+//        transaction.replace(R.id.fragment_container, detailsFragment, detailsFragment.toString());
+        transaction.addToBackStack(null);
+        transaction.commit();
+        recyclerView.setVisibility(View.GONE);
+    }
+
 }

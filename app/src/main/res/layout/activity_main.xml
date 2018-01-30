@@ -5,6 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:gravity="center_horizontal"
+    android:background="#2E4A62"
     tools:context="test.soft.ubi.recycleviewproject.MainActivity">
 
     <Button
