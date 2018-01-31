@@ -1,10 +1,4 @@
 
-¢squid:S1186"€Add a nested comment explaining why this method is empty, throw an UnsupportedOperationException or complete the implementation.(›Õäšûÿÿÿÿ8ï“Ü¼”,
-Csquid:S1068"'Remove this unused "TAG" private field.(Ô 8Â¹ç¼”,
-Isquid:S1185"(Remove this method to simply inherit it.(İßéàúÿÿÿÿ8ï“Ü¼”,
-lsquid:CommentedOutCodeLine"<This block of commented-out lines of code should be removed.(ÿÙ–‡ıÿÿÿÿ8ŞÀñ¼”,
-[squid:UselessImportCheck"-Remove this unused import 'android.os.Build'.(ãÇ¤Úıÿÿÿÿ8ÎÅ¦½”,
-gsquid:CommentedOutCodeLine"<This block of commented-out lines of code should be removed.(ââËÍ8ŞÀñ¼”,
-jsquid:UselessImportCheck"BRemove this unused import 'android.transition.TransitionInflater'.(µ³õ8ÎÅ¦½”,
-lsquid:CommentedOutCodeLine"<This block of commented-out lines of code should be removed.(°ï¢²úÿÿÿÿ8ŞÀñ¼”,
-Dsquid:S1185"(Remove this method to simply inherit it.(ßìê¯8³ˆı½”,
+›squid:S1186"€Add a nested comment explaining why this method is empty, throw an UnsupportedOperationException or complete the implementation.(›Õäšûÿÿÿÿ
+<squid:S1068"'Remove this unused "TAG" private field.(Ô 
+Hsquid:S1602",Remove useless curly braces around statement(ø«ĞÎ8Õòêä”,

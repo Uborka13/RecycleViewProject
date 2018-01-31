@@ -1,27 +1,21 @@
 package test.soft.ubi.recycleviewproject;
 
+import android.arch.lifecycle.ViewModelProviders;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.ActivityOptionsCompat;
-import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.ViewCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.transition.ChangeBounds;
 import android.transition.Fade;
-import android.transition.Slide;
-import android.transition.Transition;
-import android.transition.TransitionInflater;
-import android.transition.TransitionValues;
-import android.view.Gravity;
 import android.view.View;
 import android.view.animation.AnimationUtils;
-import android.widget.ImageView;
+import android.widget.FrameLayout;
 
 import com.mikepenz.fastadapter.FastAdapter;
 import com.mikepenz.fastadapter.IAdapter;
@@ -29,50 +23,44 @@ import com.mikepenz.fastadapter.adapters.ItemAdapter;
 import com.mikepenz.fastadapter.listeners.OnClickListener;
 import com.squareup.picasso.Picasso;
 
-import java.util.ArrayList;
-import java.util.List;
-
+import butterknife.BindView;
 import butterknife.ButterKnife;
 import test.soft.ubi.recycleviewproject.enums.Icons;
 import test.soft.ubi.recycleviewproject.items.SimpleItem;
 import test.soft.ubi.recycleviewproject.transitions.DetailsTransition;
+import test.soft.ubi.recycleviewproject.viewmodels.SimpleViewModel;
 
-public class ListActivity extends AppCompatActivity {
+public class ListActivity extends AppCompatActivity implements DetailsFragment.Presenter {
 
     public static final String TAG = "TAG";
     private static final String ANIMATION = "ANIMATION";
+    @BindView(R.id.details)
+    FrameLayout detailsLayout;
     private RecyclerView recyclerView;
+    private SimpleItem item;
+    private SimpleViewModel simpleViewModel;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_list);
         ButterKnife.bind(this);
+        simpleViewModel = ViewModelProviders.of(this).get(SimpleViewModel.class);
+        setUpRecycleView();
         update();
     }
 
-    private List<SimpleItem> generateSimpleList() {
-        List<SimpleItem> simpleViewModelList = new ArrayList<>();
-        simpleViewModelList.add(new SimpleItem().setIcon(Icons.OFFSITE));
-        simpleViewModelList.add(new SimpleItem().setIcon(Icons.ONSITE));
-        simpleViewModelList.add(new SimpleItem().setIcon(Icons.TICKET));
-        simpleViewModelList.add(new SimpleItem().setIcon(Icons.TRAIN_GRAY));
-        simpleViewModelList.add(new SimpleItem().setIcon(Icons.TRAIN_WHITE));
-        simpleViewModelList.add(new SimpleItem().setIcon(Icons.VIGNETTE));
-        simpleViewModelList.add(new SimpleItem().setIcon(Icons.OFFSITE));
-        simpleViewModelList.add(new SimpleItem().setIcon(Icons.ONSITE));
-        simpleViewModelList.add(new SimpleItem().setIcon(Icons.TICKET));
-        simpleViewModelList.add(new SimpleItem().setIcon(Icons.TRAIN_GRAY));
-        simpleViewModelList.add(new SimpleItem().setIcon(Icons.TRAIN_WHITE));
-        simpleViewModelList.add(new SimpleItem().setIcon(Icons.VIGNETTE));
-        simpleViewModelList.add(new SimpleItem().setIcon(Icons.OFFSITE));
-        simpleViewModelList.add(new SimpleItem().setIcon(Icons.ONSITE));
-        simpleViewModelList.add(new SimpleItem().setIcon(Icons.TICKET));
-        simpleViewModelList.add(new SimpleItem().setIcon(Icons.TRAIN_GRAY));
-        simpleViewModelList.add(new SimpleItem().setIcon(Icons.TRAIN_WHITE));
-        simpleViewModelList.add(new SimpleItem().setIcon(Icons.VIGNETTE));
-        return simpleViewModelList;
+    @Override
+    protected void onResume() {
+        super.onResume();
     }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+
+    }
+
 
     private void setAnimation(RecyclerView recView, int animationInt) {
         final Context context = recView.getContext();
@@ -107,21 +95,27 @@ public class ListActivity extends AppCompatActivity {
         startActivity(intent, options.toBundle());
     }
 
-    public void update() {
+    public void setUpRecycleView() {
         recyclerView = findViewById(R.id.simple_recyclerview);
         if (getIntent().getExtras() != null) {
             setAnimation(recyclerView, getIntent().getExtras().getInt(ANIMATION));
         }
+        recyclerView.getItemAnimator().setChangeDuration(0);
+        recyclerView.setLayoutManager(new LinearLayoutManager(this));
+    }
+
+    public void update() {
+
         ItemAdapter itemAdapter = new ItemAdapter();
         FastAdapter<SimpleItem> fastAdapter = FastAdapter.with(itemAdapter);
         recyclerView.setAdapter(fastAdapter);
-        recyclerView.getItemAnimator().setChangeDuration(0);
-        itemAdapter.add(generateSimpleList());
-        recyclerView.setLayoutManager(new LinearLayoutManager(this));
+        itemAdapter.add(simpleViewModel.getItems().getValue());
         fastAdapter.withSelectable(true);
+
         fastAdapter.withOnClickListener(new OnClickListener<SimpleItem>() {
             @Override
             public boolean onClick(@Nullable View v, IAdapter<SimpleItem> adapter, SimpleItem item, int position) {
+                simpleViewModel.select(item);
 //                startNewActivity(item);
                 startNewFragment(item);
                 return true;
@@ -149,21 +143,40 @@ public class ListActivity extends AppCompatActivity {
 
     public void startNewFragment(SimpleItem item) {
         DetailsFragment fragment = DetailsFragment.newInstance(item);
-        Slide slide = new Slide(Gravity.LEFT);
-        Fade fade = new Fade();
-        fade.setDuration(500);
-        slide.setDuration(500);
-        fragment.setEnterTransition(slide);
-        fragment.setSharedElementEnterTransition(fade);
+//        Slide slide = new Slide(Gravity.LEFT);
+//        Fade fade = new Fade();
+//        fade.setDuration(500);
+//        slide.setDuration(500);
+//        fragment.setEnterTransition(slide);
+//        fragment.setSharedElementEnterTransition(fade);
         FragmentManager fragmentManager = getSupportFragmentManager();
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-//        fragment.setSharedElementEnterTransition(new DetailsTransition());
-//        fragment.setEnterTransition(new Fade());
-//        fragment.setExitTransition(new Fade());
-//        fragment.setSharedElementEnterTransition(new DetailsTransition());
+        fragment.setSharedElementEnterTransition(new DetailsTransition());
+        fragment.setEnterTransition(new Fade());
+        fragment.setExitTransition(new Fade());
+        fragment.setSharedElementEnterTransition(new DetailsTransition());
         fragmentTransaction.addSharedElement(item.getImageView(), "simple_fragment_transition");
         fragmentTransaction.replace(R.id.details, fragment);
         fragmentTransaction.addToBackStack(null);
         fragmentTransaction.commit();
+    }
+
+    public SimpleItem getItem() {
+        return simpleViewModel.getSelected().getValue();
+    }
+
+    @Override
+    public void setItem(SimpleItem item) {
+        simpleViewModel.select(item);
+    }
+
+    @Override
+    public void changeItemIcon(SimpleItem item) {
+        simpleViewModel.getSelected().getValue().withLogo(Icons.ONSITE.getIcon());
+    }
+
+    @Override
+    public void setIsClickable(boolean clickable) {
+        detailsLayout.setClickable(clickable);
     }
 }

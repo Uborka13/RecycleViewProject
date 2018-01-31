@@ -1,28 +1,33 @@
 package test.soft.ubi.recycleviewproject;
 
-import android.os.Build;
+import android.arch.lifecycle.ViewModelProviders;
+import android.content.Context;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.transition.TransitionInflater;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageView;
-
-import com.squareup.picasso.Callback;
-import com.squareup.picasso.Picasso;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
 import test.soft.ubi.recycleviewproject.items.SimpleItem;
+import test.soft.ubi.recycleviewproject.viewmodels.SimpleViewModel;
 
 public class DetailsFragment extends Fragment {
 
-    private static final String TAG = "TAG";
     public static final String LOGO = "LOGO";
     public static final String NAME = "NAME";
+    private static final String TAG = "TAG";
     @BindView(R.id.simple_image)
     ImageView imageView;
+    @BindView(R.id.change_icon)
+    Button button;
+
+    private Presenter presenter;
+    private SimpleViewModel simpleViewModel;
 
     public DetailsFragment() {
     }
@@ -37,8 +42,24 @@ public class DetailsFragment extends Fragment {
     }
 
     @Override
+    public void onAttach(Context context) {
+        super.onAttach(context);
+        presenter = (Presenter) context;
+    }
+
+    @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        simpleViewModel = ViewModelProviders.of(this).get(SimpleViewModel.class);
+
+        simpleViewModel.getSelected().observe(this, item -> {
+            updateIcon();
+        });
+
+    }
+
+    public void updateIcon() {
+        imageView.setImageResource(simpleViewModel.getSelected().getValue().getIcon().getIcon());
     }
 
     @Override
@@ -46,32 +67,27 @@ public class DetailsFragment extends Fragment {
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_details, container, false);
         ButterKnife.bind(this, view);
-        int res = 0;
-        if (getArguments() != null) {
-            res = getArguments().getInt(LOGO);
-            imageView.setImageResource(res);
-//            Picasso.with(getContext())
-//                    .load(res)
-//                    .noFade()
-//                    .into(imageView, new Callback() {
-//                        @Override
-//                        public void onSuccess() {
-//                            startPostponedEnterTransition();
-//                        }
-//
-//                        @Override
-//                        public void onError() {
-//                            startPostponedEnterTransition();
-//                        }
-//                    });
-        }
+        presenter.setIsClickable(true);
         return view;
     }
-
-
 
     @Override
     public void onDestroy() {
         super.onDestroy();
+        presenter.setIsClickable(false);
+    }
+
+    @OnClick(R.id.change_icon)
+    public void onChangeIconPressed() {
+        presenter.changeItemIcon(simpleViewModel.getSelected().getValue());
+    }
+
+    public interface Presenter {
+
+        void setItem(SimpleItem item);
+
+        void changeItemIcon(SimpleItem item);
+
+        void setIsClickable(boolean clickable);
     }
 }

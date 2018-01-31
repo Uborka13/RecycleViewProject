@@ -1,8 +1,10 @@
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/colorBase"
+    android:orientation="vertical"
+    android:gravity="center_horizontal"
     tools:context="test.soft.ubi.recycleviewproject.DetailsFragment">
 
     <ImageView
@@ -12,4 +14,10 @@
         android:transitionName="simple_fragment_transition"
         tools:ignore="UnusedAttribute" />
 
-</FrameLayout>
+    <Button
+        android:id="@+id/change_icon"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Change to parking icon"/>
+
+</LinearLayout>
