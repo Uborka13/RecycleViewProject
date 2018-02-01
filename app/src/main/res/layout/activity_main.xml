@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:gravity="center_horizontal"
     android:background="#2E4A62"
-    tools:context="test.soft.ubi.recycleviewproject.MainActivity">
+    tools:context="test.soft.ubi.recycleviewproject.activities.MainActivity">
 
     <Button
         android:id="@+id/list_from_top"
@@ -25,5 +25,11 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Animated list from bottom"/>
+
+    <FrameLayout
+        android:id="@+id/details"
+        android:layout_width="match_parent"
+        android:transitionName="simple_fragment_transition"
+        android:layout_height="match_parent" />
 
 </RelativeLayout>

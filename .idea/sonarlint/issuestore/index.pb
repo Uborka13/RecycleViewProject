@@ -1,19 +1,15 @@
 
-P
- app\src\main\AndroidManifest.xml,a\c\ac6e0c942798c8a768fab2e3ab7e6a6b69b346f1
-@
-app\build.gradle,8\3\83d37b2761f0342c28dad5cd3a4bdc7a7b7d55d6
-Ö
-Uapp\src\main\java\test\soft\ubi\recycleviewproject\transitions\DetailsTransition.java,9\2\9203c8f05835a2dc814dbb0497ba3f2bd75bd3c5
 Ç
 Rapp\src\main\java\test\soft\ubi\recycleviewproject\viewmodels\SharedViewModel.java,1\9\19bd224856e889b615a33bcb272deddb06655016
-x
-Happ\src\main\java\test\soft\ubi\recycleviewproject\items\SimpleItem.java,e\4\e48cd4642aea9940ad38d960471a6d8e2416bca4
-t
-Dapp\src\main\java\test\soft\ubi\recycleviewproject\MainActivity.java,2\6\26bbcefb20a5032c72509f9606ec0fc0d417ea94
 Ç
 Rapp\src\main\java\test\soft\ubi\recycleviewproject\viewmodels\SimpleViewModel.java,c\4\c43a9bbc14d0c2eeae799c28b16138263772ab98
-w
-Gapp\src\main\java\test\soft\ubi\recycleviewproject\DetailsFragment.java,1\9\19ecea183335b562f494939e58f60e42083839c4
-t
-Dapp\src\main\java\test\soft\ubi\recycleviewproject\ListActivity.java,9\f\9f0c24a3d1450d326cf4e3b3ab76c1b19c56d9a3
+Å
+Qapp\src\main\java\test\soft\ubi\recycleviewproject\fragments\DetailsFragment.java,8\b\8b5d78cbe78f9a64dd8558b6ca5054fe659c666f
+
+Oapp\src\main\java\test\soft\ubi\recycleviewproject\activities\ListActivity.java,b\6\b65489110913d6f289b779424daf4c0d66a7a982
+Ç
+Rapp\src\main\java\test\soft\ubi\recycleviewproject\activities\DetailsActivity.java,1\1\118d12189d7ed0cab0fc5f1e6c50848d0d292793
+
+Oapp\src\main\java\test\soft\ubi\recycleviewproject\activities\MainActivity.java,a\c\acfb408534a42f51a042652d916129e0c3853ca9
+~
+Napp\src\main\java\test\soft\ubi\recycleviewproject\fragments\ListFragment.java,f\3\f30476106e61553d7539152873207043c93463d9

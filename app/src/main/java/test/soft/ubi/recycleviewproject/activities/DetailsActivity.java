@@ -1,4 +1,4 @@
-package test.soft.ubi.recycleviewproject;
+package test.soft.ubi.recycleviewproject.activities;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -10,6 +10,7 @@ import com.squareup.picasso.Picasso;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import test.soft.ubi.recycleviewproject.R;
 
 public class DetailsActivity extends AppCompatActivity {
 

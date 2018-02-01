@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/colorBase"
-    tools:context="test.soft.ubi.recycleviewproject.DetailsActivity"
+    tools:context="test.soft.ubi.recycleviewproject.activities.DetailsActivity"
     android:orientation="vertical">
 
     <ImageView

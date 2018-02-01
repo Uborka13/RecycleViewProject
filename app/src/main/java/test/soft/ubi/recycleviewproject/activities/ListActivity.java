@@ -1,10 +1,10 @@
-package test.soft.ubi.recycleviewproject;
+package test.soft.ubi.recycleviewproject.activities;
 
+import android.arch.lifecycle.LiveData;
 import android.arch.lifecycle.ViewModelProviders;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.annotation.Nullable;
 import android.support.v4.app.ActivityOptionsCompat;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
@@ -18,13 +18,13 @@ import android.view.animation.AnimationUtils;
 import android.widget.FrameLayout;
 
 import com.mikepenz.fastadapter.FastAdapter;
-import com.mikepenz.fastadapter.IAdapter;
 import com.mikepenz.fastadapter.adapters.ItemAdapter;
-import com.mikepenz.fastadapter.listeners.OnClickListener;
 import com.squareup.picasso.Picasso;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import test.soft.ubi.recycleviewproject.fragments.DetailsFragment;
+import test.soft.ubi.recycleviewproject.R;
 import test.soft.ubi.recycleviewproject.enums.Icons;
 import test.soft.ubi.recycleviewproject.items.SimpleItem;
 import test.soft.ubi.recycleviewproject.transitions.DetailsTransition;
@@ -53,12 +53,12 @@ public class ListActivity extends AppCompatActivity implements DetailsFragment.P
     @Override
     protected void onResume() {
         super.onResume();
+
     }
 
     @Override
     public void onBackPressed() {
         super.onBackPressed();
-
     }
 
 
@@ -77,7 +77,6 @@ public class ListActivity extends AppCompatActivity implements DetailsFragment.P
             default:
                 recView.setLayoutAnimation(AnimationUtils.loadLayoutAnimation(context, R.anim.layout_animation_fall_down));
                 break;
-
         }
     }
 
@@ -112,14 +111,11 @@ public class ListActivity extends AppCompatActivity implements DetailsFragment.P
         itemAdapter.add(simpleViewModel.getItems().getValue());
         fastAdapter.withSelectable(true);
 
-        fastAdapter.withOnClickListener(new OnClickListener<SimpleItem>() {
-            @Override
-            public boolean onClick(@Nullable View v, IAdapter<SimpleItem> adapter, SimpleItem item, int position) {
-                simpleViewModel.select(item);
+        fastAdapter.withOnClickListener((v, adapter, item, position) -> {
+            simpleViewModel.select(item);
 //                startNewActivity(item);
-                startNewFragment(item);
-                return true;
-            }
+            startNewFragment(item);
+            return true;
         });
     }
 
@@ -136,7 +132,6 @@ public class ListActivity extends AppCompatActivity implements DetailsFragment.P
         FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
         transaction.addSharedElement(item.getImageView(), ViewCompat.getTransitionName(item.getImageView()));
 //        transaction.replace(R.id.fragment_container, detailsFragment, detailsFragment.toString());
-        transaction.addToBackStack(null);
         transaction.commit();
         recyclerView.setVisibility(View.GONE);
     }
@@ -171,8 +166,22 @@ public class ListActivity extends AppCompatActivity implements DetailsFragment.P
     }
 
     @Override
-    public void changeItemIcon(SimpleItem item) {
-        simpleViewModel.getSelected().getValue().withLogo(Icons.ONSITE.getIcon());
+    public SimpleViewModel getViewModel() {
+        return simpleViewModel;
+    }
+
+
+
+    @Override
+    public void changeItemIcon(SimpleItem item, Icons icons) {
+        simpleViewModel.select(item);
+        simpleViewModel.getSelected().getValue().withLogo(icons.getIcon());
+
+    }
+
+    @Override
+    public LiveData<SimpleItem> getViewModelSelected() {
+        return simpleViewModel.getSelected();
     }
 
     @Override

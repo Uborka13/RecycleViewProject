@@ -1,18 +1,19 @@
-package test.soft.ubi.recycleviewproject;
+package test.soft.ubi.recycleviewproject.fragments;
 
-import android.arch.lifecycle.ViewModelProviders;
+import android.arch.lifecycle.LiveData;
 import android.content.Context;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.ImageView;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+import test.soft.ubi.recycleviewproject.R;
+import test.soft.ubi.recycleviewproject.enums.Icons;
 import test.soft.ubi.recycleviewproject.items.SimpleItem;
 import test.soft.ubi.recycleviewproject.viewmodels.SimpleViewModel;
 
@@ -23,8 +24,6 @@ public class DetailsFragment extends Fragment {
     private static final String TAG = "TAG";
     @BindView(R.id.simple_image)
     ImageView imageView;
-    @BindView(R.id.change_icon)
-    Button button;
 
     private Presenter presenter;
     private SimpleViewModel simpleViewModel;
@@ -45,17 +44,21 @@ public class DetailsFragment extends Fragment {
     public void onAttach(Context context) {
         super.onAttach(context);
         presenter = (Presenter) context;
+        simpleViewModel = presenter.getViewModel();
     }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        simpleViewModel = ViewModelProviders.of(this).get(SimpleViewModel.class);
 
-        simpleViewModel.getSelected().observe(this, item -> {
-            updateIcon();
-        });
 
+        simpleViewModel.getSelected().observe(this, item -> updateIcon());
+
+    }
+
+    public void updateViewModelSelected(SimpleItem item) {
+        simpleViewModel.select(item);
+        simpleViewModel.getSelected().observe(this, liveItem -> updateIcon());
     }
 
     public void updateIcon() {
@@ -77,16 +80,43 @@ public class DetailsFragment extends Fragment {
         presenter.setIsClickable(false);
     }
 
-    @OnClick(R.id.change_icon)
-    public void onChangeIconPressed() {
-        presenter.changeItemIcon(simpleViewModel.getSelected().getValue());
+    @OnClick(R.id.change_icon_onsite)
+    public void onOnsiteIconChangePressed() {
+        presenter.changeItemIcon(simpleViewModel.getSelected().getValue(), Icons.ONSITE);
+        simpleViewModel.select(presenter.getViewModelSelected().getValue());
+        updateViewModelSelected(simpleViewModel.getSelected().getValue());
+    }
+
+    @OnClick(R.id.change_icon_offsite)
+    public void onOffsiteIconChangePressed() {
+        presenter.changeItemIcon(simpleViewModel.getSelected().getValue(), Icons.OFFSITE);
+        simpleViewModel.select(presenter.getViewModelSelected().getValue());
+        updateViewModelSelected(simpleViewModel.getSelected().getValue());
+    }
+
+    @OnClick(R.id.change_icon_train)
+    public void onTrainIconChangePressed() {
+        presenter.changeItemIcon(simpleViewModel.getSelected().getValue(), Icons.TRAIN_GRAY);
+        simpleViewModel.select(presenter.getViewModelSelected().getValue());
+        updateViewModelSelected(simpleViewModel.getSelected().getValue());
+    }
+
+    @OnClick(R.id.change_icon_ticket)
+    public void onTicketIconChangePressed() {
+        presenter.changeItemIcon(simpleViewModel.getSelected().getValue(),Icons.TICKET);
+        simpleViewModel.select(presenter.getViewModelSelected().getValue());
+        updateViewModelSelected(simpleViewModel.getSelected().getValue());
     }
 
     public interface Presenter {
 
         void setItem(SimpleItem item);
 
-        void changeItemIcon(SimpleItem item);
+        SimpleViewModel getViewModel();
+
+        void changeItemIcon(SimpleItem item, Icons icons);
+
+        LiveData<SimpleItem> getViewModelSelected();
 
         void setIsClickable(boolean clickable);
     }

@@ -1,11 +1,0 @@
-
-Isquid:S1185"(Remove this method to simply inherit it.(œƒƒ©ùÿÿÿÿ8‡©¡ã”,
-dsquid:MaximumInheritanceDepth"=This class has 10 parents which is greater than 5 authorized.(à©œÈ
-lsquid:CommentedOutCodeLine"<This block of commented-out lines of code should be removed.(˜½ŽŒþÿÿÿÿ8‡©¡ã”,
-lsquid:CommentedOutCodeLine"<This block of commented-out lines of code should be removed.(°œõœýÿÿÿÿ8‡©¡ã”,
-Msquid:S1481",Remove this unused "options" local variable.(™¦ûÉþÿÿÿÿ8‡©¡ã”,
-Isquid:S1604"(Make this anonymous inner class a lambda(úå¤‹ýÿÿÿÿ8‡©¡ã”,
-\squid:S1854";Remove this useless assignment to local variable "options".(™¦ûÉþÿÿÿÿ8‡©¡ã”,
-Dsquid:S1185"(Remove this method to simply inherit it.(Ù«µ§8‡©¡ã”,
-Bsquid:S1068"(Remove this unused "item" private field.(¢Îþ¢ýÿÿÿÿ
-lsquid:CommentedOutCodeLine"<This block of commented-out lines of code should be removed.(à®ÂÖýÿÿÿÿ8å¼‘æ”,
