@@ -1,11 +1,0 @@
-
-^squid:HiddenFieldCheck"8Rename "item" which hides the field declared at line 40.(€Üó}8¾ñûƒ•,
-Usquid:S1854";Remove this useless assignment to local variable "options".(™¦ûÉþÿÿÿÿ
-esquid:CommentedOutCodeLine"<This block of commented-out lines of code should be removed.(˜½ŽŒþÿÿÿÿ
-lsquid:CommentedOutCodeLine"<This block of commented-out lines of code should be removed.(°œõœýÿÿÿÿ8¾ñûƒ•,
-Fsquid:S1481",Remove this unused "options" local variable.(™¦ûÉþÿÿÿÿ
-esquid:CommentedOutCodeLine"<This block of commented-out lines of code should be removed.(à®ÂÖýÿÿÿÿ
-dsquid:MaximumInheritanceDepth"=This class has 10 parents which is greater than 5 authorized.(à©œÈ
-Isquid:S1068"(Remove this unused "item" private field.(¢Îþ¢ýÿÿÿÿ8ÖæÙ„•,
-Isquid:S1185"(Remove this method to simply inherit it.(œƒƒ©ùÿÿÿÿ8Ã¢É„•,
-Dsquid:S1185"(Remove this method to simply inherit it.(Ù«µ§8¸äÅ„•,

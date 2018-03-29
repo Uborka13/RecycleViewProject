@@ -1,7 +1,6 @@
 package test.soft.ubi.recycleviewproject.fragments;
 
 import android.arch.lifecycle.LiveData;
-import android.content.Context;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
@@ -41,18 +40,10 @@ public class DetailsFragment extends Fragment {
     }
 
     @Override
-    public void onAttach(Context context) {
-        super.onAttach(context);
-        presenter = (Presenter) context;
-        simpleViewModel = presenter.getViewModel();
-    }
-
-    @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
 
-        simpleViewModel.getSelected().observe(this, item -> updateIcon());
 
     }
 

@@ -2,6 +2,8 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="test.soft.ubi.recycleviewproject">
 
+    <uses-permission android:name="android.permission.CAMERA" />
+
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -9,6 +11,10 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+        <meta-data
+            android:name="com.google.android.gms.vision.DEPENDENCIES"
+            android:value="barcode" />
+
         <activity android:name=".activities.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -16,8 +22,12 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".activities.ListActivity"/>
-        <activity android:name=".activities.DetailsActivity"/>
+        <activity android:name=".activities.ListActivity" />
+        <activity android:name=".activities.DetailsActivity" />
+        <activity android:name=".activities.QRReaderActivity" />
+        <activity
+            android:name=".activities.ScanActivity"
+            android:launchMode="singleTask" />
     </application>
 
 </manifest>

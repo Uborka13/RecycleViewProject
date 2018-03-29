@@ -17,6 +17,8 @@ import test.soft.ubi.recycleviewproject.viewmodels.SimpleViewModel;
 
 public class SimpleAdapter extends RecyclerView.Adapter {
     List<SimpleViewModel> models;
+    private double mExpandedPosition = -1;
+    private int previousExpandedPosition = -1;
 
     public SimpleAdapter(List<SimpleViewModel> models) {
         this.models = models;
@@ -31,6 +33,20 @@ public class SimpleAdapter extends RecyclerView.Adapter {
     @Override
     public void onBindViewHolder(final RecyclerView.ViewHolder holder, final int position) {
         ((SimpleViewHolder) holder).bindData(models.get(position));
+        final boolean isExpanded = position == mExpandedPosition;
+        holder.itemView.setActivated(isExpanded);
+
+        if (isExpanded)
+            previousExpandedPosition = position;
+
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mExpandedPosition = isExpanded ? -1 : position;
+                notifyItemChanged(previousExpandedPosition);
+                notifyItemChanged(position);
+            }
+        });
     }
 
     @Override

@@ -73,11 +73,13 @@ public class SimpleItem extends AbstractItem<SimpleItem, SimpleItem.ViewHolder> 
         return icons;
     }
 
-    protected static class ViewHolder extends FastAdapter.ViewHolder<SimpleItem> {
+    protected static class ViewHolder extends FastAdapter.ViewHolder<SimpleItem> implements View.OnClickListener {
         @BindView(R.id.simple_text)
         public TextView name;
         @BindView(R.id.simple_image)
         public ImageView image;
+        @BindView(R.id.simple_description)
+        public TextView desc;
 
         public ViewHolder(View itemView) {
             super(itemView);
@@ -97,5 +99,9 @@ public class SimpleItem extends AbstractItem<SimpleItem, SimpleItem.ViewHolder> 
         }
 
 
+        @Override
+        public void onClick(View view) {
+
+        }
     }
 }

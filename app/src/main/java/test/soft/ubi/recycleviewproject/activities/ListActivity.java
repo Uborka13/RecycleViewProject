@@ -23,14 +23,14 @@ import com.squareup.picasso.Picasso;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
-import test.soft.ubi.recycleviewproject.fragments.DetailsFragment;
 import test.soft.ubi.recycleviewproject.R;
 import test.soft.ubi.recycleviewproject.enums.Icons;
+import test.soft.ubi.recycleviewproject.fragments.DetailsFragment;
 import test.soft.ubi.recycleviewproject.items.SimpleItem;
 import test.soft.ubi.recycleviewproject.transitions.DetailsTransition;
 import test.soft.ubi.recycleviewproject.viewmodels.SimpleViewModel;
 
-public class ListActivity extends AppCompatActivity implements DetailsFragment.Presenter {
+public class ListActivity extends AppCompatActivity {
 
     public static final String TAG = "TAG";
     private static final String ANIMATION = "ANIMATION";
@@ -160,31 +160,30 @@ public class ListActivity extends AppCompatActivity implements DetailsFragment.P
         return simpleViewModel.getSelected().getValue();
     }
 
-    @Override
+    //    @Override
     public void setItem(SimpleItem item) {
         simpleViewModel.select(item);
     }
 
-    @Override
+    //    @Override
     public SimpleViewModel getViewModel() {
         return simpleViewModel;
     }
 
 
-
-    @Override
+    //    @Override
     public void changeItemIcon(SimpleItem item, Icons icons) {
         simpleViewModel.select(item);
         simpleViewModel.getSelected().getValue().withLogo(icons.getIcon());
 
     }
 
-    @Override
+    //    @Override
     public LiveData<SimpleItem> getViewModelSelected() {
         return simpleViewModel.getSelected();
     }
 
-    @Override
+    //    @Override
     public void setIsClickable(boolean clickable) {
         detailsLayout.setClickable(clickable);
     }

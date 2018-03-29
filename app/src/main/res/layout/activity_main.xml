@@ -1,35 +1,48 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main_activity_layout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:gravity="center_horizontal"
-    android:background="#2E4A62"
+    android:background="@color/colorBase"
     tools:context="test.soft.ubi.recycleviewproject.activities.MainActivity">
 
-    <Button
-        android:id="@+id/list_from_top"
+    <RelativeLayout
+        android:id="@+id/buttons_layout"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Animated list from top"/>
-    <Button
-        android:id="@+id/list_from_right"
-        android:layout_below="@id/list_from_top"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Animated list from right"/>
-    <Button
-        android:id="@+id/list_from_bottom"
-        android:layout_below="@id/list_from_right"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Animated list from bottom"/>
+        android:layout_height="match_parent">
+
+        <Button
+            android:id="@+id/list_from_top"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Animated list from top" />
+
+        <Button
+            android:id="@+id/list_from_right"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/list_from_top"
+            android:text="Animated list from right" />
+
+        <Button
+            android:id="@+id/list_from_bottom"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/list_from_right"
+            android:text="Animated list from bottom" />
+
+        <Button
+            android:id="@+id/start_qr"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+    </RelativeLayout>
+
 
     <FrameLayout
-        android:id="@+id/details"
+        android:id="@+id/main_details"
         android:layout_width="match_parent"
-        android:transitionName="simple_fragment_transition"
-        android:layout_height="match_parent" />
+        android:layout_height="match_parent"
+        android:transitionName="simple_fragment_transition" />
 
 </RelativeLayout>
