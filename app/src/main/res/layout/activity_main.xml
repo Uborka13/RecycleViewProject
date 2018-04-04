@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/colorBase"
-    tools:context="test.soft.ubi.recycleviewproject.activities.MainActivity">
+    tools:context=".mashedup.activities.MainActivity">
 
     <RelativeLayout
         android:id="@+id/buttons_layout"
@@ -35,7 +35,16 @@
         <Button
             android:id="@+id/start_qr"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"
+            android:layout_below="@id/list_from_bottom"
+            android:text="QR" />
+
+        <Button
+            android:id="@+id/start_sample"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/start_qr"
+            android:text="Sample" />
     </RelativeLayout>
 
 

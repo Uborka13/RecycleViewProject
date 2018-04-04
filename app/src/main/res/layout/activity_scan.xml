@@ -4,7 +4,7 @@
     android:id="@+id/activity_scan"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="test.soft.ubi.recycleviewproject.activities.ScanActivity">
+    tools:context=".mashedup.activities.ScanActivity">
 
     <SurfaceView
         android:id="@+id/cameraView"

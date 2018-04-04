@@ -15,19 +15,20 @@
             android:name="com.google.android.gms.vision.DEPENDENCIES"
             android:value="barcode" />
 
-        <activity android:name=".activities.MainActivity">
+        <activity android:name=".mashedup.activities.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".activities.ListActivity" />
-        <activity android:name=".activities.DetailsActivity" />
-        <activity android:name=".activities.QRReaderActivity" />
+        <activity android:name=".mashedup.activities.ListActivity" />
+        <activity android:name=".mashedup.activities.DetailsActivity" />
+        <activity android:name=".mashedup.activities.QRReaderActivity" />
         <activity
-            android:name=".activities.ScanActivity"
+            android:name=".mashedup.activities.ScanActivity"
             android:launchMode="singleTask" />
+        <activity android:name=".recycleviewsample.activity.ListHolderActivity"></activity>
     </application>
 
 </manifest>

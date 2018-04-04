@@ -5,7 +5,7 @@
     android:background="@color/colorBase"
     android:orientation="vertical"
     android:gravity="center_horizontal"
-    tools:context="test.soft.ubi.recycleviewproject.fragments.DetailsFragment">
+    tools:context=".mashedup.fragments.DetailsFragment">
 
     <ImageView
         android:id="@+id/simple_image"
